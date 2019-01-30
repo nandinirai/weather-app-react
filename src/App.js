@@ -15,19 +15,20 @@ class App extends React.Component {
     country: undefined,
     humidity: undefined,
     description: undefined,
-    error: undefined
+    error: undefined,
   }
 
-  //getWeather is a method we'll use to make the api call
-  getWeather = async (e) => {
 
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-    e.preventDefault();   
+  async componentDidMount() {
+    const city = "London";
+    const country = "UK";
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`);
     const response = await api_call.json();
+
     console.log(response);
-    if(city && country){
+    const { name: cityName } = response
+
+    if (city && country) {
       this.setState({
         temperature: response.main.temp,
         city: response.name,
@@ -35,28 +36,30 @@ class App extends React.Component {
         humidity: response.main.humidity,
         description: response.weather[0].description,
         error: ""
+
       })
-    }else{
+    } else {
       this.setState({
         error: "Please input search values..."
       })
     }
   }
 
+
   render() {
 
     return (
 
       <div>
-         <div className="wrapper">
+        <div className="wrapper">
           <div className="main">
             <div className="container">
               <div className="row">
-                <div className="col-xs-5 title-container">
-                <Titles />
+                  <div className="title-container">
+                  <Titles />
                 </div>
-                <div className="col-xs-7 form-container">
-                <Form loadWeather={this.getWeather} />
+                <div className="form-container">
+                  <Form loadWeather={this.getWeather} />
                   <Weather
                     temperature={this.state.temperature}
                     city={this.state.city}
