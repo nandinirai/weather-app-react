@@ -74,6 +74,12 @@ render() {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.response);
+  }
+
+
+
   
 }
 export default App;
