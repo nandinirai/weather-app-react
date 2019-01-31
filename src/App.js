@@ -8,7 +8,9 @@ const Api_Key = "dc2e79ea5b82ec169c4329400280b744";
 
 class App extends React.Component {
 
-  state = {
+  constructor() {
+  super();
+  this.state = {
 
     temperature: undefined,
     city: undefined,
@@ -17,6 +19,7 @@ class App extends React.Component {
     description: undefined,
     error: undefined,
   }
+}
 
 
   async componentDidMount() {
@@ -35,7 +38,7 @@ class App extends React.Component {
         country: response.sys.country,
         humidity: response.main.humidity,
         description: response.weather[0].description,
-        error: ""
+        error: "",
 
       })
     } else {
