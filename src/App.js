@@ -11,7 +11,6 @@ class App extends React.Component {
   constructor() {
   super();
   this.state = {
-
     temperature: undefined,
     city: undefined,
     country: undefined,
@@ -79,6 +78,9 @@ class App extends React.Component {
       </div>
 
     )
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 }
 export default App;
